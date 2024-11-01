@@ -1,3 +1,5 @@
+"use client"
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import {
@@ -21,20 +23,24 @@ const Stage3 = () => {
   const interviewDetails = useSelector((state) => state.interview);
   const [isSaved, setIsSaved] = useState(false);
 
-  if (!interviewDetails.stage1Completed || interviewDetails.questions.length === 0) {
-    router.push('/stage1');
-    return null;
-  }
+  useEffect(() => {
+    if (!interviewDetails.stage1Completed || interviewDetails.questions.length === 0) {
+      router.push('/stage1');
+    }
+  }, [interviewDetails, router]);
 
   const handleEdit = (stage) => {
     router.push(`/${stage}`);
   };
 
   const handlePublish = () => {
-    
     setIsSaved(true);
-    setTimeout(() => setIsSaved(false), 3000); // Reset after 3 seconds
+    setTimeout(() => setIsSaved(false), 3000);
   };
+
+  if (!interviewDetails.stage1Completed || interviewDetails.questions.length === 0) {
+    return null;
+  }
 
   return (
     <Container maxWidth="md" className={styles.container}>

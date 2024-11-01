@@ -1,3 +1,4 @@
+"use client"
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
@@ -19,10 +20,13 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    if (router.pathname === '/') {
-      router.push('/stage1');
-    }
-  }, [router]);
+    const redirectToStage1 = async () => {
+      if (router.isReady && router.pathname === '/') {
+        await router.push('/stage1');
+      }
+    };
+    redirectToStage1();
+  }, [router.isReady, router.pathname]);
 
   return (
     <>

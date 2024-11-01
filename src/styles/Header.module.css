@@ -1,0 +1,108 @@
+.header {
+    background: var(--background);
+    border-bottom: 1px solid var(--gray-alpha-200);
+    padding: 1rem 2rem;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.logo a {
+    color: var(--foreground);
+    text-decoration: none;
+}
+
+.stages {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.stageWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.stageLink {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    text-decoration: none;
+    color: var(--foreground);
+    transition: background-color 0.2s;
+}
+
+.stageLink:hover {
+    background: var(--gray-alpha-100);
+}
+
+.stageLink.active {
+    background: var(--gray-alpha-200);
+    font-weight: 500;
+}
+
+.stageNumber {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--gray-alpha-100);
+    font-size: 0.875rem;
+}
+
+.active .stageNumber {
+    background: var(--foreground);
+    color: var(--background);
+}
+
+.stageLabel {
+    font-size: 0.875rem;
+}
+
+.connector {
+    width: 20px;
+    height: 1px;
+    background: var(--gray-alpha-200);
+    margin: 0 0.5rem;
+}
+
+.stageLink.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 1rem;
+    }
+
+    .stageLabel {
+        display: none;
+    }
+
+    .stageLink {
+        padding: 0.5rem;
+    }
+
+    .connector {
+        width: 12px;
+    }
+}

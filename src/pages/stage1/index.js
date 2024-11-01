@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { 
@@ -33,10 +33,10 @@ const Stage1 = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(setInterviewDetails(formData));
-    router.push('/stage2');
+    await router.push('/stage2');
   };
 
   return (

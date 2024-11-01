@@ -1,5 +1,5 @@
 "use client"
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import {
@@ -16,16 +16,18 @@ import {
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import styles from '@/styles/Stage3.module.css';
-import { useState } from 'react';
 
 const Stage3 = () => {
   const router = useRouter();
   const interviewDetails = useSelector((state) => state.interview);
   const [isSaved, setIsSaved] = useState(false);
+  const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
     if (!interviewDetails.stage1Completed || interviewDetails.questions.length === 0) {
       router.push('/stage1');
+    } else {
+      setShouldRender(true);
     }
   }, [interviewDetails, router]);
 
@@ -38,7 +40,7 @@ const Stage3 = () => {
     setTimeout(() => setIsSaved(false), 3000);
   };
 
-  if (!interviewDetails.stage1Completed || interviewDetails.questions.length === 0) {
+  if (!shouldRender) {
     return null;
   }
 

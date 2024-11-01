@@ -1,3 +1,4 @@
+"use client"
 import { Box, Button } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
@@ -29,12 +30,17 @@ const Footer = () => {
     }
   };
 
+  const handleNavigation = async () => {
+    const nextRoute = getNextRoute();
+    await router.push(nextRoute);
+  };
+
   return (
     <Box className={styles.footer}>
       <Button
         variant="contained"
         color="primary"
-        onClick={() => router.push(getNextRoute())}
+        onClick={handleNavigation}
         disabled={!isNextEnabled()}
       >
         Next

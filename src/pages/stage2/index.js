@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import {
@@ -89,17 +89,18 @@ const Stage2 = () => {
   const { questions, stage1Completed } = useSelector((state) => state.interview);
   const [newQuestion, setNewQuestion] = useState('');
 
+  useEffect(() => {
+    if (!stage1Completed) {
+      router.push('/stage1');
+    }
+  }, [stage1Completed, router]);
+
   // Add mock questions if none exist
-  useState(() => {
+  useEffect(() => {
     if (questions.length === 0) {
       MOCK_QUESTIONS.forEach(q => dispatch(addQuestion(q)));
     }
-  }, []);
-
-  if (!stage1Completed) {
-    router.push('/stage1');
-    return null;
-  }
+  }, [questions.length, dispatch]);
 
   const handleAddQuestion = () => {
     if (newQuestion.trim()) {
